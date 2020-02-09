@@ -17,4 +17,5 @@ const pathesByAbbreviation = {
   opportunities: "/v2/applications"
 };
 
-module.exports = generateUrls(baseUrl, pathesByAbbreviation);
+export const urls = generateUrls(baseUrl, pathesByAbbreviation);
+export const token = accessToken;

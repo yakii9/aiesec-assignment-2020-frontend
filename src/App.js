@@ -1,8 +1,17 @@
 import React from "react";
+import SearchPage from "./modules/SearchPage";
+import { token } from "./config";
+import apiClient from "./utils/apiClient";
 import "./App.css";
 
 function App() {
-  return <div className="App">text</div>;
+  apiClient.setToken(token);
+
+  return (
+    <div className="App">
+      <SearchPage />
+    </div>
+  );
 }
 
 export default App;
