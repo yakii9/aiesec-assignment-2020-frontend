@@ -50,6 +50,10 @@ export default class SearchPage extends React.Component {
   render() {
     return (
       <div className="container">
+        <img src="https://cdn-expa.aiesec.org/assets/images/aiesec_org/search-cover.jpg" />
+        <div className="search-cover-picture-box">
+          <p className="search-cover-picture-box">你的故事从这里开始...</p>
+        </div>
         {this.state.list.map(item => {
           return <Card key={item.id}></Card>;
         })}
