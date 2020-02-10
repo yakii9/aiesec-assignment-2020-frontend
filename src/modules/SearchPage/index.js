@@ -2,6 +2,7 @@ import React from "react";
 import apiClient from "../../utils/apiClient";
 import { urls } from "../../config";
 import Card from "./components/Card";
+import "./index.css";
 
 export default class SearchPage extends React.Component {
   constructor(props) {
@@ -49,13 +50,12 @@ export default class SearchPage extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <img src="https://cdn-expa.aiesec.org/assets/images/aiesec_org/search-cover.jpg" />
+      <div className="search-page-container">
         <div className="search-cover-picture-box">
-          <p className="search-cover-picture-box">你的故事从这里开始...</p>
+          <p className="search-cover-picture-text">你的故事从这里开始...</p>
         </div>
         {this.state.list.map(item => {
-          return <Card key={item.id}></Card>;
+          return <Card {...item} key={item.id}></Card>;
         })}
       </div>
     );

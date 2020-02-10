@@ -1,0 +1,19 @@
+.search-page-container {
+  width: 100%;
+  min-width: 600px;
+}
+
+.search-cover-picture-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 460px;
+  width: 100%;
+  background-size: cover;
+  background-image: url("https://cdn-expa.aiesec.org/assets/images/aiesec_org/search-cover.jpg");
+}
+
+.search-cover-picture-text {
+  font-size: 46px;
+  color: aliceblue;
+}
