@@ -14,7 +14,7 @@ function Card(props) {
         />
         <div className="baseLayer-info-box">
           <h3 className="baseLayer-title">{props.projectName}</h3>
-          <p className="baseLayer-append-info">{`${props.personName} · ${props.date}`}</p>
+          <p className="baseLayer-append-info">{props.personName}</p>
           <div className="baseLayer-inner-box">
             <p className="baseLayer-organization-name">
               {props.organizationName}

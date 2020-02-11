@@ -1,4 +1,24 @@
 .card-container {
-    min-height: 220px;
-    min-width: 660px;
+    min-height: 120px;
+    min-width: 600px;
+    width: 720px;
+    margin: 12px;
+}
+
+.card-container:hover {
+    background-color: gainsboro;
+}
+
+.baseLayer-outer-box {
+    display: flex;
+    justify-content: flex-start;
+    padding: 12px;;
+}
+
+.baseLayer-info-box {
+    margin-left: 12px;
+}
+
+.overlayer-outer-box {
+    padding: 12px;
 }
