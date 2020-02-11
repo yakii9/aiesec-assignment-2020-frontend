@@ -22,3 +22,10 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.card-skeleton {
+  min-height: 120px;
+  min-width: 600px;
+  width: 720px;
+  margin: 12px;
+}
