@@ -37,6 +37,7 @@ function Card(props) {
   return (
     <div
       className="card-container"
+      onClick={() => props.handleClick(props.id)}
       onMouseOver={() => setMouseOverCondition(true)}
       onMouseOut={() => setMouseOverCondition(false)}
     >

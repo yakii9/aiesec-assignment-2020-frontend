@@ -2,6 +2,7 @@ import React from "react";
 import apiClient from "../../utils/apiClient";
 import { urls } from "../../config";
 import Card from "./components/Card";
+import { Modal, Button, Input } from 'antd';
 import "./index.css";
 
 export default class SearchPage extends React.Component {
@@ -11,7 +12,10 @@ export default class SearchPage extends React.Component {
       list: [],
       currentPage: 1,
       totalPages: 1,
-      isLoading: false
+      isLoading: false,
+      modalVisible: false,
+      currentListItemId: undefined,
+      title: ''
     };
   }
 
@@ -63,6 +67,35 @@ export default class SearchPage extends React.Component {
     );
   }
 
+  handleModalOpen(id) {
+    this.setState({
+      currentListItemId: id,
+      modalVisible: true
+    })
+  }
+
+  handleModalClose() {
+    this.setState({
+      modalVisible: false
+    })
+  }
+
+  handleSubmitChange() {
+    const text = this.state.text;
+    const list = [...this.state.list];
+    const idx = this.state.list.findIndex((item) => item.id === this.state.currentListItemId);
+
+    if (idx > -1) {
+      list[idx].projectAim = text;
+      list[idx].coverAlt = text;
+      list[idx].projectName = text;
+      this.setState({
+        list
+      })
+      this.handleModalClose()
+    }
+  }
+
   componentDidMount() {
     const querySet = {
       page: this.state.currentPage
@@ -92,9 +125,17 @@ export default class SearchPage extends React.Component {
         </div>
         <div className="list-container">
           {this.state.list.map(item => {
-            return <Card {...item} key={item.id}></Card>;
+            return <Card {...item} handleClick={this.handleModalOpen.bind(this)} key={item.id}></Card>;
           })}
         </div>
+        <Modal
+          title="Change Title"
+          visible={this.state.modalVisible}
+          onOk={this.handleSubmitChange.bind(this)}
+          onCancel={this.handleModalClose.bind(this)}
+        >
+          <Input onChange={(e) => (this.setState({text: e.target.value}))} />
+        </Modal>
       </div>
     );
   }
