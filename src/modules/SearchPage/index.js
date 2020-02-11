@@ -2,7 +2,7 @@ import React from "react";
 import apiClient from "../../utils/apiClient";
 import { urls } from "../../config";
 import Card from "./components/Card";
-import { Modal, Button, Input } from 'antd';
+import { Modal, Button, Input, Skeleton } from 'antd';
 import "./index.css";
 
 export default class SearchPage extends React.Component {
@@ -127,6 +127,7 @@ export default class SearchPage extends React.Component {
           {this.state.list.map(item => {
             return <Card {...item} handleClick={this.handleModalOpen.bind(this)} key={item.id}></Card>;
           })}
+          {this.state.isLoading && <Skeleton className="card-skeleton" active/>}
         </div>
         <Modal
           title="Change Title"
