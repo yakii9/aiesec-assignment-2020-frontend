@@ -15,7 +15,7 @@ export default class SearchPage extends React.Component {
       isLoading: false,
       modalVisible: false,
       currentListItemId: undefined,
-      title: ''
+      text: ''
     };
   }
 
