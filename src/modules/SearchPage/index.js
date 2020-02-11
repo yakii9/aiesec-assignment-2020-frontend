@@ -15,6 +15,27 @@ export default class SearchPage extends React.Component {
     };
   }
 
+  covertOriginData (list) {
+    if (!list || !list.map) {
+      throw 'please set a array'
+    }
+
+    return list.map(item => {
+      const payload = {};
+      payload.id =item.id;
+      payload.coverImgUrl = item.opportunity.profile_photo_urls.thumb;
+      payload.coverAlt = item.opportunity.title;
+      payload.linkUrl = item.url;
+      payload.projectName = item.opportunity.title;
+      payload.origanizationName = item.opportunity.office.full_name;
+      payload.personName = item.person.full_name;
+      payload.projectAim = item.opportunity.title;
+      payload.description = item.opportunity.title;
+
+      return payload;
+    })
+  }
+
   getOpportunityList(params) {
     if (this.state.isLoading) {
       return false;
@@ -25,14 +46,15 @@ export default class SearchPage extends React.Component {
       urls.opportunities,
       params,
       res => {
-        const list = res.data.data;
+        const list = this.state.list.concat(this.covertOriginData(res.data.data));
         const currentPage = res.data.paging.current_page;
         const totalPages = res.data.paging.total_pages;
 
         this.setState({
           list,
           currentPage,
-          totalPages
+          totalPages,
+          isLoading: false
         });
       },
       err => {
@@ -46,6 +68,20 @@ export default class SearchPage extends React.Component {
       page: this.state.currentPage
     };
     this.getOpportunityList(querySet);
+  
+    window.addEventListener('scroll', () => {
+      var scrollTop = document.body.scrollTop ? document.body.scrollTop : document.documentElement.scrollTop;
+      var clientHeight = document.documentElement.clientHeight?document.documentElement.clientHeight : document.body.clientHeight;
+      var scrollHeight = document.documentElement.scrollHeight ? document.documentElement.scrollHeight : document.body.scrollHeight;
+
+      if(this.state.isLoading) {
+        return;
+      }
+
+      if((scrollTop + clientHeight + 50) > scrollHeight) {
+        (this.state.currentPage < this.state.totalPages) && this.getOpportunityList({ page: this.state.currentPage + 1 });
+      }
+    })
   }
 
   render() {
@@ -54,9 +90,11 @@ export default class SearchPage extends React.Component {
         <div className="search-cover-picture-box">
           <p className="search-cover-picture-text">你的故事从这里开始...</p>
         </div>
-        {this.state.list.map(item => {
-          return <Card {...item} key={item.id}></Card>;
-        })}
+        <div className="list-container">
+          {this.state.list.map(item => {
+            return <Card {...item} key={item.id}></Card>;
+          })}
+        </div>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
 
-function C(props) {
+function Card(props) {
   const [isMouseOver, setMouseOverCondition] = useState(false);
 
   function BaseLayer() {
@@ -14,13 +14,10 @@ function C(props) {
         />
         <div className="baseLayer-info-box">
           <h3 className="baseLayer-title">{props.projectName}</h3>
-          <p className="baseLayer-append-info">{`${props.personName} · ${props.date} · ${props.duration}`}</p>
+          <p className="baseLayer-append-info">{`${props.personName} · ${props.date}`}</p>
           <div className="baseLayer-inner-box">
             <p className="baseLayer-organization-name">
               {props.organizationName}
-            </p>
-            <p className="baseLayer-applicant-name">
-              {props.applicantNum} applicants
             </p>
           </div>
         </div>
@@ -48,4 +45,4 @@ function C(props) {
   );
 }
 
-export default C;
+export default Card;
