@@ -92,7 +92,7 @@ export default class SearchPage extends React.Component {
       this.setState({
         list
       })
-      this.handleModalClose()
+      this.handleModalClose();
     }
   }
 
